@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+#coldier1 {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+}
+
+#coldier2 {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}
+
+img {
+  position: absolute;
+  min-height: 100vh;
+  min-width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
+  animation-name: ZAKAT;
+  animation-duration: 10s;
+  opacity: 0;
+}
+
+@keyframes ZAKAT {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
