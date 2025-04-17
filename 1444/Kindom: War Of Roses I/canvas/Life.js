@@ -22,7 +22,7 @@ function goLife() {
   let m = 30;
   for (let i = 0; i < m; i++) {
     mas[i] = [];
-    for (let j = 0; j < m; j++) {
+    for (let j = 0; j < n; j++) {
       mas[i][j] = 0;
     }
   }
@@ -43,18 +43,22 @@ function drawField() {
 function startLife() {
   let mas = [];
   for (let i = 0; i < 30; i++) {
-    mas[i] = [];
+    mas2[i] = [];
     for (let j = 0; j < 30; j++) {
       let neighbors = 0;
       if (mas[fpm(i) - 1][j] == 1) neighbors++;
       if (mas[i][fpp(j) + 1] == 1) neighbors++;
       if (mas[fpm(i) + 1][j] == 1) neighbors++;
       if (mas[i][fpm(j) - 1] == 1) neighbors++;
-      (neighbors == 2 || neighbors == 3) ? mas2[i][j]=1
+      if (mas[fpm(i) - 1][fpp(j) + 1] == 1) neighbors++;
+      if (mas[fpp(i) + 1][fpp(j) + 1] == 1) neighbors++;
+      if (mas[fpp(i) + 1][fpm(j) - 1] == 1) neighbors++;
+      if (mas[fpm(i) - 1][fpm(j) - 1] == 1) neighbors++;
+      neighbors == 2 || neighbors == 3 ? (mas2[i][j] = 1) : mas2[i][j] == 0;
     }
-    mas = mas2
-    drawField()
-    count++
+    mas = mas2;
+    drawField();
+    count++;
     document.getElementById("count").innerHTML = count;
   }
 }
@@ -64,4 +68,10 @@ function fpm(i) {
   else return i;
 }
 
+function fpp(i) {
+  if (i == 29) return -1;
+  else return i;
+}
+
 setInterval(startLife, 200);
+// document.getElementById("start").onclick = start;

@@ -6,8 +6,6 @@ console.log("Перемещение: Зажмите Стрелку Направ�
 // Rybashiy - Защита от Рубящего Удара
 // Kolyhiy - Защита от Колющего Удара
 
-maneken();
-
 let isDefendingJohn = false;
 let isDefendingHenry = false;
 let isDefending = false;
@@ -16,6 +14,11 @@ let Won = false;
 let distance = 7;
 let WonInTournament = false;
 let weapon;
+let money = 2190;
+
+// maneken();
+
+game();
 
 function duel() {
   document.addEventListener("keydown", (event) => {
@@ -248,17 +251,127 @@ function UdarHenry(typeOfImpact, directionOfImpact) {
     }
   }, 1250);
 }
-
-function UdarJohn() {
+function UdarJohn(typeOfImpact, directionOfImpact) {
   setTimeout(() => {
-    if (isDefendingHenry === true) {
+    if (isDefendingJohn === true) {
       console.log("Удар Отбита");
-      isDefendingHenry = false;
+      isDefendingJohn = false;
     } else {
       console.log("Удар не Отбита");
+      if (typeOfImpact === 1) {
+        if (directionOfImpact === "Top") {
+          if (weapon === 1) {
+            nanosnik.health =
+              nanosnik.health - (100 - (TopKolyhiy / 100) * 100);
+          }
+          if (weapon === 2) {
+            nanosnik.health = nanosnik.health - (50 - (TopKolyhiy / 100) * 50);
+          }
+          if (weapon === 3) {
+            nanosnik.health = nanosnik.health - (10 - (TopKolyhiy / 100) * 10);
+          }
+        }
+        if (directionOfImpact === "Bottom") {
+          if (weapon === 1) {
+            nanosnik.health =
+              nanosnik.health - (100 - (BottomKolyhiy / 100) * 100);
+          }
+          if (weapon === 2) {
+            nanosnik.health =
+              nanosnik.health - (50 - (BottomKolyhiy / 100) * 50);
+          }
+          if (weapon === 3) {
+            nanosnik.health =
+              nanosnik.health - (10 - (BottomKolyhiy / 100) * 10);
+          }
+        }
+        if (directionOfImpact === "Right") {
+          if (weapon === 1) {
+            nanosnik.health =
+              nanosnik.health - (100 - (RightKolyhiy / 100) * 100);
+          }
+          if (weapon === 2) {
+            nanosnik.health =
+              nanosnik.health - (50 - (RightKolyhiy / 100) * 50);
+          }
+          if (weapon === 3) {
+            nanosnik.health =
+              nanosnik.health - (10 - (RightKolyhiy / 100) * 10);
+          }
+        }
+        if (directionOfImpact === "Left") {
+          if (weapon === 1) {
+            nanosnik.health =
+              nanosnik.health - (100 - (LeftKolyhiy / 100) * 100);
+          }
+          if (weapon === 2) {
+            nanosnik.health = nanosnik.health - (50 - (LeftKolyhiy / 100) * 50);
+          }
+          if (weapon === 3) {
+            nanosnik.health = nanosnik.health - (10 - (LeftKolyhiy / 100) * 10);
+          }
+        }
+      }
+      if (typeOfImpact === 2) {
+        if (directionOfImpact === "Top") {
+          if (weapon === 1) {
+            nanosnik.health =
+              nanosnik.health - (100 - (TopRybashiy / 100) * 100);
+          }
+          if (weapon === 2) {
+            nanosnik.health = nanosnik.health - (50 - (TopRybashiy / 100) * 50);
+          }
+          if (weapon === 3) {
+            nanosnik.health = nanosnik.health - (10 - (TopRybashiy / 100) * 10);
+          }
+        }
+        if (directionOfImpact === "Bottom") {
+          if (weapon === 1) {
+            nanosnik.health =
+              nanosnik.health - (100 - (BottomRybashiy / 100) * 100);
+          }
+          if (weapon === 2) {
+            nanosnik.health =
+              nanosnik.health - (50 - (BottomRybashiy / 100) * 50);
+          }
+          if (weapon === 3) {
+            nanosnik.health =
+              nanosnik.health - (10 - (BottomRybashiy / 100) * 10);
+          }
+        }
+        if (directionOfImpact === "Right") {
+          if (weapon === 1) {
+            nanosnik.health =
+              nanosnik.health - (100 - (RightRybashiy / 100) * 100);
+          }
+          if (weapon === 2) {
+            nanosnik.health =
+              nanosnik.health - (50 - (RightRybashiy / 100) * 50);
+          }
+          if (weapon === 3) {
+            nanosnik.health =
+              nanosnik.health - (10 - (RightRybashiy / 100) * 10);
+          }
+        }
+        if (directionOfImpact === "Left") {
+          if (weapon === 1) {
+            nanosnik.health =
+              nanosnik.health - (100 - (LeftRybashiy / 100) * 100);
+          }
+          if (weapon === 2) {
+            nanosnik.health =
+              nanosnik.health - (50 - (LeftRybashiy / 100) * 50);
+          }
+          if (weapon === 3) {
+            nanosnik.health =
+              nanosnik.health - (10 - (LeftRybashiy / 100) * 10);
+          }
+        }
+      }
     }
   }, 1250);
 }
+
 const nanosnik = {
   name: "Джон Наносник",
   weapon: "Двуручный Меч",
@@ -273,31 +386,14 @@ const nanosnik = {
   TopKolyhiy: 70,
 
   health: 100,
-  decide() {
-    if (position === "1") {
-      console.log("Наносник говорит: «Ну-ка держись, быдло!»");
-      this.attack();
-    } else if (this.health < 30) {
-      this.dodge();
-    } else {
-      if (Math.random() > 0.5) this.attack();
-      else this.block();
-    }
-    if ((this.health = 0)) {
-      WonInTournament = true;
-      alert("Вы Победили");
+  if(playerIsAttacking) {
+    if (Math.random() < 0.75) {
+      bot.parry(playerAttackDirection);
     }
   },
+
   attack() {
-    console.log("Наносник делает выпад!");
-  },
-
-  block() {
-    console.log("Наносник прикрывается!");
-  },
-
-  dodge() {
-    console.log("Наносник уходит в сторону!");
+    UdarJohn();
   },
 };
 let Cuirass = 0;
@@ -401,7 +497,6 @@ function checkingArmor(inventory) {
 }
 
 let spear = false;
-let money = 2190;
 
 function tournament() {
   alert("Сафрон-Уолден. Кто Это? - Генри из Кентербери");
