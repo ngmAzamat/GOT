@@ -32,6 +32,20 @@ class Unit {
     this.rotate = rotate;
     this.isCavalry = isCavalry;
     this.faction = faction; // 'Genoa', 'France', 'England'
+    // добляем анимацию этап I: переменная this.speedY
+  }
+
+  // добляем анимацию этап I: фнукция update() и переменная this.speedY
+  update() {
+    if (
+      (this.isCavalry && this.faction === "france" && this.y > 300) ||
+      (this.faction === "genoa" && this.y > 230)
+    ) {
+      this.speedY = -0.5;
+      this.y += this.speedY;
+    } else {
+      this.speedY = 0;
+    }
   }
 
   draw() {
@@ -179,6 +193,8 @@ function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
   for (let unit of units) {
+    // добляем анимацию этап II: вызов update()
+    unit.update();
     unit.draw();
   }
 }
