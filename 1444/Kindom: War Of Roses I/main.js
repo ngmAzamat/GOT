@@ -396,19 +396,19 @@ const nanosnik = {
     UdarJohn();
   },
 };
-let Cuirass = 0;
-
-let RightRybashiy = 0;
-let LeftRybashiy = 0;
-let BottomRybashiy = 0;
-let TopRybashiy = 0;
-
-let RightKolyhiy = 0;
-let LeftKolyhiy = 0;
-let BottomKolyhiy = 0;
-let TopKolyhiy = 0;
 
 function checkingArmor(inventory) {
+  let Cuirass = 0;
+
+  let RightRybashiy = 0;
+  let LeftRybashiy = 0;
+  let BottomRybashiy = 0;
+  let TopRybashiy = 0;
+
+  let RightKolyhiy = 0;
+  let LeftKolyhiy = 0;
+  let BottomKolyhiy = 0;
+  let TopKolyhiy = 0;
   for (const item of inventory) {
     if (item === "Шлем Бацинет") {
       alert("Оденьте Шлем Бацинет");
@@ -496,9 +496,7 @@ function checkingArmor(inventory) {
   }
 }
 
-let spear = false;
-
-function tournament() {
+function tournament(spear) {
   alert("Сафрон-Уолден. Кто Это? - Генри из Кентербери");
   alert(
     "а Это, Его мы Называем Джон Наносик, когда его отец в Битве При Форьмини... сражался против Француза, ему Разбили Нос, и Его Сын Теперь ходит Только в Баценете с Наносником - Капитан Ричард"
@@ -509,9 +507,11 @@ function tournament() {
   );
   if (a == "1") {
     money = money + 100;
+    return spear;
   }
   if (a == "2") {
     spear = true;
+    return spear;
   }
 }
 
@@ -594,13 +594,13 @@ function game() {
   } else {
     alert("Вы ушли из кузницы ни с чем.");
   }
-  checkingArmor();
+  checkingArmor(inventory);
   const whoI = prompt(
     "Кент. Кто Вы? - Некий Вооруженный Человек, 1. Я Генри из Кентербери, Солдат Короля Генриха VI Ланкастера, кто вы? 2. я Горожанин из Кентербери... "
   );
   if (whoI == 1) {
     alert("Убирайся Мерский Ланкастер-Наемник");
-    // должна быть дуэль
+    // duel();
   } else {
     alert(
       "Я Филипп Из Гента, Солдат Герцога Филиппа III Валуа, Воин Герцога Йорка..."
@@ -615,7 +615,8 @@ function game() {
     alert("Ричард Герцог Йорк Убит в прошлом году - Капитан Ричард");
     alert("но наша армия Разбита и Оступила на Север - Капитан Ричард");
     alert("мы должны Помоч Королеве и Выдвинутся к Таутону - Капитан Ричард");
-    tournament();
+    let spear = false;
+    spear = tournament(spear);
     alert("Йоркшир, Таутон. Удар Алебрадой");
     alert("... Нет, Мы не Добиваем Ранненых! -Первый Неизвесный Солдат");
     alert("Почему? все Добивают а Наша Рота нет! - Второй Неизвесный Солдат");
@@ -651,12 +652,12 @@ function game() {
           "Генри Умер с Честью Достойной не Наемника, а Рыцаря"
       );
     } else if (WhatIDouing == "4") {
-      EndOfTheGame();
+      EndOfTheGame(spear);
     }
   }
 }
 
-function EndOfTheGame() {
+function EndOfTheGame(spear) {
   alert(
     "Бегите!Бегите!у него Цвайхандер!он Ландскнехт! - Первый Неизвесный Крестиьянин"
   );
@@ -679,7 +680,7 @@ function EndOfTheGame() {
     "** Скочат Всадники **\n" +
       "Мой Земельный Надел в Ноттингемшире Потвержден Королем Эдуардом IV Йорков! Мои Крестьяне! - Джон Де Морубей, Герцог Норфолк"
   );
-  const FINAL = confirm(
+  const FINAL = prompt(
     "1. ухожу в Лес\n" + "2. Герцог, я Вызываю вас на Поединок!"
   );
   if (FINAL == "1") {
